@@ -1,19 +1,21 @@
-import React from 'react';
+// HeaderMobile.pw.tsx
 
-import { ENVS_MAP } from 'playwright/fixtures/mockEnvs';
-import { test, expect, devices } from 'playwright/lib';
+import React from "react";
 
-import HeaderMobile from './HeaderMobile';
+import { ENVS_MAP } from "playwright/fixtures/mockEnvs";
+import { test, expect, devices } from "playwright/lib";
 
-test.use({ viewport: devices['iPhone 13 Pro'].viewport });
+import HeaderMobile from "./HeaderMobile";
 
-test.beforeEach(async({ mockEnvs }) => {
-  await mockEnvs([
-    ...ENVS_MAP.rewardsService,
-  ]);
+test.use({ viewport: devices["iPhone 13 Pro"].viewport });
+
+test.beforeEach(async ({ mockEnvs }) => {
+  await mockEnvs([...ENVS_MAP.rewardsService]);
 });
 
-test('default view +@dark-mode', async({ render, page }) => {
-  await render(<HeaderMobile/>);
-  await expect(page).toHaveScreenshot({ clip: { x: 0, y: 0, width: 1500, height: 150 } });
+test("default view +@dark-mode", async ({ render, page }) => {
+  await render(<HeaderMobile />);
+  await expect(page).toHaveScreenshot({
+    clip: { x: 0, y: 0, width: 1500, height: 150 },
+  });
 });

@@ -27,23 +27,23 @@ declare module "nextjs-routes" {
     | StaticRoute<"/api/proxy">
     | DynamicRoute<"/api/tokens/[hash]/instances/[id]/media-type", { "hash": string; "id": string }>
     | StaticRoute<"/api-docs">
-    | DynamicRoute<"/apps/[id]", { "id": string }>
     | StaticRoute<"/apps">
+    | DynamicRoute<"/apps/[id]", { "id": string }>
     | StaticRoute<"/auth/profile">
-    | DynamicRoute<"/batches/[number]", { "number": string }>
     | DynamicRoute<"/batches/celestia/[height]/[commitment]", { "height": string; "commitment": string }>
     | StaticRoute<"/batches">
+    | DynamicRoute<"/batches/[number]", { "number": string }>
     | DynamicRoute<"/blobs/[hash]", { "hash": string }>
-    | DynamicRoute<"/block/[height_or_hash]", { "height_or_hash": string }>
-    | DynamicRoute<"/block/countdown/[height]", { "height": string }>
     | StaticRoute<"/block/countdown">
+    | DynamicRoute<"/block/countdown/[height]", { "height": string }>
+    | DynamicRoute<"/block/[height_or_hash]", { "height_or_hash": string }>
     | StaticRoute<"/blocks">
     | DynamicRoute<"/cc/tx/[hash]", { "hash": string }>
     | DynamicRoute<"/chain/[chain_slug]/accounts/label/[slug]", { "chain_slug": string; "slug": string }>
     | DynamicRoute<"/chain/[chain_slug]/advanced-filter", { "chain_slug": string }>
-    | DynamicRoute<"/chain/[chain_slug]/block/[height_or_hash]", { "chain_slug": string; "height_or_hash": string }>
-    | DynamicRoute<"/chain/[chain_slug]/block/countdown/[height]", { "chain_slug": string; "height": string }>
     | DynamicRoute<"/chain/[chain_slug]/block/countdown", { "chain_slug": string }>
+    | DynamicRoute<"/chain/[chain_slug]/block/countdown/[height]", { "chain_slug": string; "height": string }>
+    | DynamicRoute<"/chain/[chain_slug]/block/[height_or_hash]", { "chain_slug": string; "height_or_hash": string }>
     | DynamicRoute<"/chain/[chain_slug]/csv-export", { "chain_slug": string }>
     | DynamicRoute<"/chain/[chain_slug]/op/[hash]", { "chain_slug": string; "hash": string }>
     | DynamicRoute<"/chain/[chain_slug]/token/[hash]", { "chain_slug": string; "hash": string }>
@@ -55,8 +55,8 @@ declare module "nextjs-routes" {
     | StaticRoute<"/csv-export">
     | StaticRoute<"/deposits">
     | StaticRoute<"/dispute-games">
-    | DynamicRoute<"/epochs/[number]", { "number": string }>
     | StaticRoute<"/epochs">
+    | DynamicRoute<"/epochs/[number]", { "number": string }>
     | DynamicRoute<"/essential-dapps/[id]", { "id": string }>
     | StaticRoute<"/gas-tracker">
     | StaticRoute<"/hot-contracts">
@@ -73,13 +73,13 @@ declare module "nextjs-routes" {
     | StaticRoute<"/operations">
     | StaticRoute<"/ops">
     | StaticRoute<"/output-roots">
-    | DynamicRoute<"/pools/[hash]", { "hash": string }>
     | StaticRoute<"/pools">
+    | DynamicRoute<"/pools/[hash]", { "hash": string }>
     | StaticRoute<"/public-tags/submit">
     | StaticRoute<"/search-results">
     | StaticRoute<"/sprite">
-    | DynamicRoute<"/stats/[id]", { "id": string }>
     | StaticRoute<"/stats">
+    | DynamicRoute<"/stats/[id]", { "id": string }>
     | DynamicRoute<"/token/[hash]", { "hash": string }>
     | DynamicRoute<"/token/[hash]/instance/[id]", { "hash": string; "id": string }>
     | StaticRoute<"/token-transfers">
@@ -89,8 +89,8 @@ declare module "nextjs-routes" {
     | StaticRoute<"/txs">
     | DynamicRoute<"/txs/kettle/[hash]", { "hash": string }>
     | StaticRoute<"/uptime">
-    | DynamicRoute<"/validators/[id]", { "id": string }>
     | StaticRoute<"/validators">
+    | DynamicRoute<"/validators/[id]", { "id": string }>
     | StaticRoute<"/verified-contracts">
     | StaticRoute<"/visualize/sol2uml">
     | StaticRoute<"/withdrawals">;

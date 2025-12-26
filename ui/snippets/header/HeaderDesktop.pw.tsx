@@ -1,17 +1,17 @@
-import React from 'react';
+// HeaderDesktop.pw.tsx
 
-import { ENVS_MAP } from 'playwright/fixtures/mockEnvs';
-import { test, expect } from 'playwright/lib';
+import React from "react";
 
-import HeaderDesktop from './HeaderDesktop';
+import { ENVS_MAP } from "playwright/fixtures/mockEnvs";
+import { test, expect } from "playwright/lib";
 
-test.beforeEach(async({ mockEnvs }) => {
-  await mockEnvs([
-    ...ENVS_MAP.rewardsService,
-  ]);
+import HeaderDesktop from "./HeaderDesktop";
+
+test.beforeEach(async ({ mockEnvs }) => {
+  await mockEnvs([...ENVS_MAP.rewardsService]);
 });
 
-test('default view +@dark-mode', async({ render }) => {
-  const component = await render(<HeaderDesktop/>);
+test("default view +@dark-mode", async ({ render }) => {
+  const component = await render(<HeaderDesktop />);
   await expect(component).toHaveScreenshot();
 });
