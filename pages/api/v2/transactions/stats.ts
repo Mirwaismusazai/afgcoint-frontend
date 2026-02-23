@@ -89,7 +89,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   let past24h = false;
 
   try {
-    do {
+    let done = false;
+    while (!done) {
       const { transfers, pageKey: nextPageKey } = await fetchTransfers(pageKey);
 
       for (const tx of transfers) {
@@ -102,10 +103,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         totalCount += 1;
       }
 
-      if (past24h || !nextPageKey) break;
-      pageKey = nextPageKey;
-    } while (true);
+      done = past24h || !nextPageKey;
+      if (!done) pageKey = nextPageKey;
+    }
   } catch (err) {
+    // eslint-disable-next-line no-console -- API route error logging
     console.error('NodeReal stats fetch failed:', err);
     res.status(502).json(statsResponse(0));
     return;

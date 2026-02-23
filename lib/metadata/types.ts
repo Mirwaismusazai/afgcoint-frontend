@@ -3,6 +3,9 @@ import type { TokenInfo } from 'types/api/token';
 
 import type { Route } from 'nextjs-routes';
 
+/** Route pathnames that are pages (excludes /api/*) so metadata maps don't require API route entries. */
+export type PagePathname = Exclude<Route['pathname'], `/api/${ string }`>;
+
 /* eslint-disable @stylistic/indent */
 export type ApiData<Pathname extends Route['pathname']> =
 (

@@ -1,11 +1,13 @@
 /* eslint-disable max-len */
+import type { PagePathname } from 'lib/metadata/types';
+
 import type { Route } from 'nextjs-routes';
 
 // equal og:description
 const DEFAULT_TEMPLATE = 'Open-source block explorer by Blockscout. Search transactions, verify smart contracts, analyze addresses, and track network activity. Complete blockchain data and APIs for the %network_title% network.';
 
 // FIXME all page descriptions will be updated later
-const TEMPLATE_MAP: Record<Route['pathname'], string> = {
+const TEMPLATE_MAP: Record<PagePathname, string> = {
   '/': DEFAULT_TEMPLATE,
   '/txs': DEFAULT_TEMPLATE,
   '/internal-txs': DEFAULT_TEMPLATE,
@@ -90,14 +92,6 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/login': DEFAULT_TEMPLATE,
   '/sprite': DEFAULT_TEMPLATE,
   '/chakra': DEFAULT_TEMPLATE,
-  '/api/metrics': DEFAULT_TEMPLATE,
-  '/api/monitoring/invalid-api-schema': DEFAULT_TEMPLATE,
-  '/api/log': DEFAULT_TEMPLATE,
-  '/api/tokens/[hash]/instances/[id]/media-type': DEFAULT_TEMPLATE,
-  '/api/proxy': DEFAULT_TEMPLATE,
-  '/api/csrf': DEFAULT_TEMPLATE,
-  '/api/healthz': DEFAULT_TEMPLATE,
-  '/api/config': DEFAULT_TEMPLATE,
 };
 
 const TEMPLATE_MAP_ENHANCED: Partial<Record<Route['pathname'], string>> = {
@@ -105,5 +99,7 @@ const TEMPLATE_MAP_ENHANCED: Partial<Record<Route['pathname'], string>> = {
 };
 
 export function make(pathname: Route['pathname'], isEnriched = false) {
-  return (isEnriched ? TEMPLATE_MAP_ENHANCED[pathname] : undefined) ?? TEMPLATE_MAP[pathname] ?? '';
+  return (isEnriched ? TEMPLATE_MAP_ENHANCED[pathname] : undefined) ??
+    TEMPLATE_MAP[pathname as PagePathname] ??
+    DEFAULT_TEMPLATE;
 }

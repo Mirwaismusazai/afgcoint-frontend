@@ -97,8 +97,8 @@ RUN set -a && \
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-# Build app for production
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+# Build app for production (increase heap to avoid OOM during lint/typecheck)
+ENV NODE_OPTIONS="--max-old-space-size=8192"
 RUN yarn build
 
 

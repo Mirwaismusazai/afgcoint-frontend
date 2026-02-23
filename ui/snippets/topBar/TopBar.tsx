@@ -71,5 +71,5 @@ import MarketplaceAppTopBar from "../../marketplace/MarketplaceAppTopBar";
 // };
 
 // export default React.memo(TopBar);
-const TopBar = () => {};
+const TopBar = () => null;
 export default TopBar;

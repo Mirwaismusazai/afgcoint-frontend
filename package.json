@@ -4,15 +4,15 @@
   "private": false,
   "homepage": "https://github.com/blockscout/frontend#readme",
   "engines": {
-    "node": ">=22.14.0",
+    "node": ">=20.0.0",
     "npm": ">=10.9.0"
   },
   "scripts": {
     "dev": "./tools/scripts/dev.sh",
     "dev:preset": "./tools/scripts/dev.preset.sh",
     "dev:preset:sync": "tsc -p ./tools/preset-sync/tsconfig.json && node ./tools/preset-sync/index.js",
-    "build": "next build",
-    "build:next": "./deploy/scripts/download_assets.sh ./public/assets/configs && yarn svg:build-sprite && ./deploy/scripts/make_envs_script.sh && next build",
+    "build": "sh -c 'ulimit -n 65536 2>/dev/null || true; exec env NODE_OPTIONS=--max-old-space-size=8192 next build'",
+    "build:next": "./deploy/scripts/download_assets.sh ./public/assets/configs && yarn svg:build-sprite && ./deploy/scripts/make_envs_script.sh && NODE_OPTIONS=--max-old-space-size=8192 next build",
     "build:docker": "./tools/scripts/build.docker.sh",
     "start": "next start",
     "start:docker:local": "docker run -p 3000:3000 --env-file .env.local blockscout-frontend:local",
@@ -195,7 +195,7 @@
     "ws": "^8.17.1"
   },
   "lint-staged": {
-    // "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   },
   "resolutions": {
     "@types/react": "18.3.12",

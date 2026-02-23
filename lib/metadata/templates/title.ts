@@ -1,4 +1,5 @@
 import { getFeaturePayload } from 'configs/app/features/types';
+import type { PagePathname } from 'lib/metadata/types';
 
 import type { Route } from 'nextjs-routes';
 
@@ -6,7 +7,9 @@ import config from 'configs/app';
 
 const dappEntityName = (getFeaturePayload(config.features.marketplace)?.titles.entity_name ?? '').toLowerCase();
 
-const TEMPLATE_MAP: Record<Route['pathname'], string> = {
+const DEFAULT_TITLE = '%network_name%';
+
+const TEMPLATE_MAP: Record<PagePathname, string> = {
   '/': '%network_name% blockchain explorer - View %network_name% stats',
   '/txs': '%network_name% transactions - %network_name% explorer',
   '/internal-txs': '%network_name% internal transactions - %network_name% explorer',
@@ -91,14 +94,6 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/login': '%network_name% login',
   '/sprite': '%network_name% SVG sprite',
   '/chakra': '%network_name% Chakra UI showcase',
-  '/api/metrics': '%network_name% node API prometheus metrics',
-  '/api/monitoring/invalid-api-schema': '%network_name% node API prometheus metrics',
-  '/api/log': '%network_name% node API request log',
-  '/api/tokens/[hash]/instances/[id]/media-type': '%network_name% node API token instance media type',
-  '/api/proxy': '%network_name% node API proxy',
-  '/api/csrf': '%network_name% node API CSRF token',
-  '/api/healthz': '%network_name% node API health check',
-  '/api/config': '%network_name% node API app config',
 };
 
 const TEMPLATE_MAP_ENHANCED: Partial<Record<Route['pathname'], string>> = {
@@ -110,7 +105,9 @@ const TEMPLATE_MAP_ENHANCED: Partial<Record<Route['pathname'], string>> = {
 };
 
 export function make(pathname: Route['pathname'], isEnriched = false) {
-  const template = (isEnriched ? TEMPLATE_MAP_ENHANCED[pathname] : undefined) ?? TEMPLATE_MAP[pathname];
+  const template = (isEnriched ? TEMPLATE_MAP_ENHANCED[pathname] : undefined) ??
+    TEMPLATE_MAP[pathname as PagePathname] ??
+    DEFAULT_TITLE;
   const postfix = config.meta.promoteBlockscoutInTitle ? ' | Blockscout' : '';
 
   return (template + postfix).trim();

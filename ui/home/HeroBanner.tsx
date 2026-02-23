@@ -20,6 +20,9 @@ import config from "configs/app";
 const GOLD_GRADIENT =
   "linear-gradient(135deg, #CEB05D 0%, #DFB526 40%, #B88F33 100%)";
 
+/** Exported for Chakra showcase (Button hero sample). */
+export const BACKGROUND_DEFAULT = GOLD_GRADIENT;
+
 const DARK_TEXT = "#0B0E14";
 const MUTED_DARK_TEXT = "rgba(11, 14, 20, 0.75)";
 

@@ -24,6 +24,7 @@ const LogoFallback = () => {
 
 type Props = {
   className?: string;
+  isBig?: boolean;
 };
 
 const NetworkLogo = ({ className, isBig }: Props) => {

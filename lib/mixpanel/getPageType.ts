@@ -1,6 +1,8 @@
+import type { PagePathname } from 'lib/metadata/types';
+
 import type { Route } from 'nextjs-routes';
 
-export const PAGE_TYPE_DICT: Record<Route['pathname'], string> = {
+export const PAGE_TYPE_DICT: Record<PagePathname, string> = {
   '/': 'Homepage',
   '/txs': 'Transactions',
   '/internal-txs': 'Internal transactions',
@@ -85,16 +87,8 @@ export const PAGE_TYPE_DICT: Record<Route['pathname'], string> = {
   '/login': 'Login',
   '/sprite': 'Sprite',
   '/chakra': 'Chakra UI showcase',
-  '/api/metrics': 'Node API: Prometheus metrics',
-  '/api/monitoring/invalid-api-schema': 'Node API: Prometheus metrics',
-  '/api/log': 'Node API: Request log',
-  '/api/tokens/[hash]/instances/[id]/media-type': 'Node API: Token instance media type',
-  '/api/proxy': 'Node API: Proxy',
-  '/api/csrf': 'Node API: CSRF token',
-  '/api/healthz': 'Node API: Health check',
-  '/api/config': 'Node API: App config',
 };
 
 export default function getPageType(pathname: Route['pathname']) {
-  return PAGE_TYPE_DICT[pathname] || 'Unknown page';
+  return PAGE_TYPE_DICT[pathname as PagePathname] ?? 'Unknown page';
 }

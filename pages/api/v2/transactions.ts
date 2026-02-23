@@ -69,13 +69,13 @@ function transferToTransaction(tx: NodeRealTransfer, humanValue: string, blockNu
 }
 
 interface BlockscoutTransactionsResponse {
-  items: ReturnType<typeof transferToTransaction>[];
+  items: Array<ReturnType<typeof transferToTransaction>>;
   next_page_params: { pageKey: string } | null;
 }
 
 let cache: { data: BlockscoutTransactionsResponse; timestamp: number } | null = null;
 
-function getPageKeyFromQuery(nextPageParams: string | string[] | undefined): string | undefined {
+function getPageKeyFromQuery(nextPageParams: string | Array<string> | undefined): string | undefined {
   if (!nextPageParams) return undefined;
   const raw = Array.isArray(nextPageParams) ? nextPageParams[0] : nextPageParams;
   if (!raw) return undefined;
@@ -130,12 +130,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       body: JSON.stringify(body),
     });
   } catch (err) {
+    // eslint-disable-next-line no-console -- API route error logging
     console.error('NodeReal fetch failed:', err);
     res.status(502).json({ error: 'Failed to fetch from NodeReal', details: String(err) });
     return;
   }
 
   if (!response.ok) {
+    // eslint-disable-next-line no-console -- API route error logging
     console.error('NodeReal error response:', response.status, await response.text());
     res.status(502).json({ error: `NodeReal returned ${ response.status }` });
     return;
@@ -145,12 +147,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     data = await response.json() as { result?: NodeRealResult; error?: { message: string } };
   } catch (err) {
+    // eslint-disable-next-line no-console -- API route error logging
     console.error('NodeReal invalid JSON:', err);
     res.status(502).json({ error: 'Invalid NodeReal response', details: String(err) });
     return;
   }
 
   if (data.error) {
+    // eslint-disable-next-line no-console -- API route error logging
     console.error('NodeReal error response:', data);
     res.status(502).json({ error: data.error.message ?? 'NodeReal API error' });
     return;
@@ -159,17 +163,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const transfers = data.result?.transfers ?? [];
   const items = transfers.map((tx: NodeRealTransfer) => {
     const rawValue = BigInt(tx.value);
-    const decimals = tx.decimal != null && tx.decimal !== '' ? parseInt(tx.decimal, 10) : AFG_DECIMALS;
-    const humanValue = (rawValue / (10n ** BigInt(decimals))).toString();
-    const blockNum = typeof tx.blockNum === 'string' && tx.blockNum.startsWith('0x')
-      ? parseInt(tx.blockNum, 16)
-      : Number(tx.blockNum);
+    const decimals = tx.decimal != null && tx.decimal !== '' ?
+      parseInt(tx.decimal, 10) :
+      AFG_DECIMALS;
+    const divisor = BigInt(Math.pow(10, decimals));
+    const humanValue = (rawValue / divisor).toString();
+    const blockNum = typeof tx.blockNum === 'string' && tx.blockNum.startsWith('0x') ?
+      parseInt(tx.blockNum, 16) :
+      Number(tx.blockNum);
     const ts = Number(tx.blockTimeStamp) || 0;
     return transferToTransaction(tx, humanValue, blockNum, ts);
   });
 
-  const next_page_params = data.result?.pageKey ? { pageKey: data.result.pageKey } : null;
-  const result: BlockscoutTransactionsResponse = { items, next_page_params };
+  const nextPageParams = data.result?.pageKey ?
+    { pageKey: data.result.pageKey } :
+    null;
+  const result: BlockscoutTransactionsResponse = { items, next_page_params: nextPageParams };
 
   if (isFirstPage) {
     cache = { data: result, timestamp: Date.now() };

@@ -1,8 +1,10 @@
+import type { PagePathname } from './types';
+
 import type { Route } from 'nextjs-routes';
 
 type OGPageType = 'Homepage' | 'Root page' | 'Regular page';
 
-const OG_TYPE_DICT: Record<Route['pathname'], OGPageType> = {
+const OG_TYPE_DICT: Record<PagePathname, OGPageType> = {
   '/': 'Homepage',
   '/txs': 'Root page',
   '/internal-txs': 'Root page',
@@ -87,16 +89,8 @@ const OG_TYPE_DICT: Record<Route['pathname'], OGPageType> = {
   '/login': 'Regular page',
   '/sprite': 'Regular page',
   '/chakra': 'Regular page',
-  '/api/metrics': 'Regular page',
-  '/api/monitoring/invalid-api-schema': 'Regular page',
-  '/api/log': 'Regular page',
-  '/api/tokens/[hash]/instances/[id]/media-type': 'Regular page',
-  '/api/proxy': 'Regular page',
-  '/api/csrf': 'Regular page',
-  '/api/healthz': 'Regular page',
-  '/api/config': 'Regular page',
 };
 
 export default function getPageOgType(pathname: Route['pathname']) {
-  return OG_TYPE_DICT[pathname];
+  return OG_TYPE_DICT[pathname as PagePathname] ?? 'Regular page';
 }

@@ -84,7 +84,8 @@ const CodeEditor = ({ data, remappings, libraries, language, mainFile, contractN
   })();
 
   React.useEffect(() => {
-    instance?.editor.setTheme(colorMode === 'light' ? 'blockscout-light' : 'blockscout-dark');
+    const theme = (colorMode as 'dark' | 'light') === 'light' ? 'blockscout-light' : 'blockscout-dark';
+    instance?.editor.setTheme(theme);
   }, [ colorMode, instance?.editor ]);
 
   const handleEditorDidMount = React.useCallback((editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
@@ -93,7 +94,7 @@ const CodeEditor = ({ data, remappings, libraries, language, mainFile, contractN
 
     monaco.editor.defineTheme('blockscout-light', themes.light);
     monaco.editor.defineTheme('blockscout-dark', themes.dark);
-    monaco.editor.setTheme(colorMode === 'light' ? 'blockscout-light' : 'blockscout-dark');
+    monaco.editor.setTheme((colorMode as 'dark' | 'light') === 'light' ? 'blockscout-light' : 'blockscout-dark');
 
     if (editorLanguage === 'scilla') {
       monaco.languages.register({ id: editorLanguage });
