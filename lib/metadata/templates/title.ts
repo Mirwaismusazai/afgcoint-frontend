@@ -104,11 +104,6 @@ const TEMPLATE_MAP_ENHANCED: Partial<Record<Route['pathname'], string>> = {
   '/stats/[id]': '%title% chart on %network_name%',
 };
 
-export function make(pathname: Route['pathname'], isEnriched = false) {
-  const template = (isEnriched ? TEMPLATE_MAP_ENHANCED[pathname] : undefined) ??
-    TEMPLATE_MAP[pathname as PagePathname] ??
-    DEFAULT_TITLE;
-  const postfix = config.meta.promoteBlockscoutInTitle ? ' | Blockscout' : '';
-
-  return (template + postfix).trim();
+export function make(_pathname: Route['pathname'], _isEnriched = false) {
+  return 'AFGScan';
 }

@@ -1,23 +1,25 @@
-import type { IconProps } from '@chakra-ui/react';
-import { Icon } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import React from 'react';
 
-import LogoIcon from 'icons/networks/logo-placeholder.svg';
+const AFGSCAN_LOGO_PATH = '/assets/branding/afgcoin-logo-v3-100px.png';
 
-export const ChartWatermark = React.memo((props: IconProps) => {
+export const ChartWatermark = React.memo((props: BoxProps) => {
   return (
-    <Icon
+    <Box
       position="absolute"
       opacity={ 0.1 }
       top="50%"
       left="50%"
       transform="translate(-50%, -50%)"
       pointerEvents="none"
-      viewBox="0 0 114 20"
-      color={{ _light: 'link.primary', _dark: 'white' }}
+      w="114px"
+      h="20px"
+      bgImage={ `url(${ AFGSCAN_LOGO_PATH })` }
+      bgSize="contain"
+      bgRepeat="no-repeat"
+      bgPosition="center"
       { ...props }
-    >
-      <LogoIcon/>
-    </Icon>
+    />
   );
 });

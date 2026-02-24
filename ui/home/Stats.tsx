@@ -38,6 +38,12 @@ const Stats = () => {
     },
   });
 
+  const txsStatsQuery = useApiQuery('general:txs_stats', {
+    queryOptions: {
+      refetchOnMount: false,
+    },
+  });
+
   const isPlaceholderData = statsQuery.isPlaceholderData || apiQuery.isPlaceholderData;
 
   React.useEffect(() => {
@@ -140,13 +146,18 @@ const Stats = () => {
         }s`,
         isLoading,
       },
-      (statsData?.total_transactions?.value || apiData?.total_transactions) && {
+      (statsData?.total_transactions?.value || apiData?.total_transactions || txsStatsQuery.data?.transactions_count_24h) && {
         id: 'total_txs' as const,
         icon: 'transactions' as const,
         label: statsData?.total_transactions?.title || 'Total transactions',
-        value: Number(statsData?.total_transactions?.value || apiData?.total_transactions).toLocaleString(),
+        value: Number(
+          statsData?.total_transactions?.value ||
+          apiData?.total_transactions ||
+          txsStatsQuery.data?.transactions_count_24h ||
+          0,
+        ).toLocaleString(),
         href: { pathname: '/txs' as const },
-        isLoading,
+        isLoading: isLoading || txsStatsQuery.isPlaceholderData,
       },
       (isArbitrumRollup && statsData?.total_operational_transactions?.value) && {
         id: 'total_operational_txs' as const,

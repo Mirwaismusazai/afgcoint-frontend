@@ -139,22 +139,20 @@ const Footer = () => {
           <Flex columnGap={2} textStyle="xs" alignItems="center">
             <span>Made with</span>
             <Link
-              href="https://www.blockscout.com"
+              href="https://afgcoin.net"
               external
               noIcon
               display="inline-flex"
               color={logoColor}
               _hover={{ color: logoColor }}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <IconSvg
-                name="networks/logo-placeholder"
-                width="80px"
-                height={4}
-              />
+              AFGCoin
             </Link>
           </Flex>
           <Text mt={3} fontSize="xs">
-            AFGCoin is a tool for inspecting and analyzing EVM based
+            AFGScan is a tool for inspecting and analyzing EVM based
             blockchains.
           </Text>
           <Box mt={6} alignItems="start" textStyle="xs">
@@ -241,7 +239,7 @@ const Footer = () => {
             mt={{ base: 8, lg: 0 }}
           >
             {[
-              { title: "Blockscout", links: BLOCKSCOUT_LINKS },
+              { title: "AFGCoin", links: BLOCKSCOUT_LINKS },
               ...(linksData || []),
             ]
               .slice(0, colNum)
