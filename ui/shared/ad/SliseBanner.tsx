@@ -15,59 +15,11 @@ import {
 
 const SliseBanner = ({ className, format = 'responsive' }: BannerProps) => {
 
-  if (format === 'desktop') {
-    return (
-      <Flex className={ className } h={ `${ DESKTOP_BANNER_HEIGHT }px` }>
-        <SliseAd
-          slotId={ config.chain.name || '' }
-          pub="pub-10"
-          format="728x90"
-          style={{ width: `${ DESKTOP_BANNER_WIDTH }px`, height: `${ DESKTOP_BANNER_HEIGHT }px` }}/>
-      </Flex>
-    );
-  }
-
-  if (format === 'mobile') {
-    return (
-      <Flex
-        className={ className }
-        h={ `${ MOBILE_BANNER_HEIGHT }px` }
-        w={ `${ MOBILE_BANNER_WIDTH }px` }
-        justifyContent="center"
-      >
-        <SliseAd
-          slotId={ config.chain.name || '' }
-          pub="pub-10"
-          format="320x100"
-          style={{ width: `${ MOBILE_BANNER_WIDTH }px`, height: `${ MOBILE_BANNER_HEIGHT }px` }}/>
-      </Flex>
-    );
-  }
-
-  return (
-    <>
-      <Flex className={ className } h={ `${ DESKTOP_BANNER_HEIGHT }px` } display={{ base: 'none', lg: 'flex' }}>
-        <SliseAd
-          slotId={ config.chain.name || '' }
-          pub="pub-10"
-          format="728x90"
-          style={{ width: `${ DESKTOP_BANNER_WIDTH }px`, height: `${ DESKTOP_BANNER_HEIGHT }px` }}/>
-      </Flex>
-      <Flex
-        className={ className }
-        h={ `${ MOBILE_BANNER_HEIGHT }px` }
-        w={ `${ MOBILE_BANNER_WIDTH }px` }
-        justifyContent="center"
-        display={{ base: 'flex', lg: 'none' }}
-      >
-        <SliseAd
-          slotId={ config.chain.name || '' }
-          pub="pub-10"
-          format="320x100"
-          style={{ width: `${ MOBILE_BANNER_WIDTH }px`, height: `${ MOBILE_BANNER_HEIGHT }px` }}/>
-      </Flex>
-    </>
-  );
+  // Advertisement display commented out (reversible)
+  // if (format === 'desktop') { return ( <Flex>...</Flex> ); }
+  // if (format === 'mobile') { return ( <Flex>...</Flex> ); }
+  // return ( <> ... SliseAd ... </> );
+  return null;
 };
 
 export default chakra(SliseBanner);

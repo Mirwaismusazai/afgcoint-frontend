@@ -26,7 +26,8 @@ const ZetaChainCCTX = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
       <PageTitle
         title="Cross-chain tx details"
         secondRow={ <TxEntityZetaChainCC hash={ hash } noLink variant="subheading" mr={{ base: 0, lg: 2 }}/> }

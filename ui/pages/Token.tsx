@@ -276,7 +276,8 @@ const TokenPageContent = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
 
       <TokenPageTitle
         tokenQuery={ tokenQuery }

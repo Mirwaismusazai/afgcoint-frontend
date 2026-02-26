@@ -61,20 +61,21 @@ const AdbutlerBanner = ({ className, format = 'responsive' }: BannerProps) => {
     return null;
   }
 
-  const getElementId = (id: string) => id + (format ? `_${ format }` : '');
-
-  return (
-    <Flex
-      className={ className }
-      id={ getElementId('adBanner') }
-      h={ isMobile ? `${ MOBILE_BANNER_HEIGHT }px` : `${ DESKTOP_BANNER_HEIGHT }px` }
-      w={ isMobile ? `${ MOBILE_BANNER_WIDTH }px` : `${ DESKTOP_BANNER_WIDTH }px` }
-    >
-      <Script strategy="lazyOnload" id="ad-butler-1">{ connectAdbutler }</Script>
-      <Script strategy="lazyOnload" id="ad-butler-2">{ placeAd(isMobile) }</Script>
-      <div id="ad-banner"></div>
-    </Flex>
-  );
+  // Advertisement display commented out (reversible)
+  // const getElementId = (id: string) => id + (format ? `_${ format }` : '');
+  // return (
+  //   <Flex
+  //     className={ className }
+  //     id={ getElementId('adBanner') }
+  //     h={ isMobile ? `${ MOBILE_BANNER_HEIGHT }px` : `${ DESKTOP_BANNER_HEIGHT }px` }
+  //     w={ isMobile ? `${ MOBILE_BANNER_WIDTH }px` : `${ DESKTOP_BANNER_WIDTH }px` }
+  //   >
+  //     <Script strategy="lazyOnload" id="ad-butler-1">{ connectAdbutler }</Script>
+  //     <Script strategy="lazyOnload" id="ad-butler-2">{ placeAd(isMobile) }</Script>
+  //     <div id="ad-banner"></div>
+  //   </Flex>
+  // );
+  return null;
 };
 
 export default chakra(AdbutlerBanner);

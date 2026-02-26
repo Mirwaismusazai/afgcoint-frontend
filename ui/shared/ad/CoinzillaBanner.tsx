@@ -26,29 +26,21 @@ const CoinzillaBanner = ({ className, format = 'responsive' }: BannerProps) => {
     return { width: DESKTOP_BANNER_WIDTH, height: DESKTOP_BANNER_HEIGHT };
   })();
 
-  React.useEffect(() => {
-    if (isInBrowser) {
-      window.coinzilla_display = window.coinzilla_display || [];
-      const cDisplayPreferences = {
-        zone: '26660bf627543e46851',
-        width: width.toString(),
-        height: height.toString(),
-      };
-      window.coinzilla_display.push(cDisplayPreferences);
-    }
-  }, [ isInBrowser, width, height ]);
+  // React.useEffect(() => { ... }); // ad script
 
-  return (
-    <Flex
-      className={ className }
-      id={ 'adBanner' + (format ? `_${ format }` : '') }
-      h={ height ? `${ height }px` : { base: `${ MOBILE_BANNER_HEIGHT }px`, lg: `${ DESKTOP_BANNER_HEIGHT }px` } }
-      w={ width ? `${ width }px` : undefined }
-    >
-      <Script strategy="lazyOnload" src="https://coinzillatag.com/lib/display.js"/>
-      <div className="coinzilla" data-zone="C-26660bf627543e46851"></div>
-    </Flex>
-  );
+  // Advertisement display commented out (reversible)
+  // return (
+  //   <Flex
+  //     className={ className }
+  //     id={ 'adBanner' + (format ? `_${ format }` : '') }
+  //     h={ height ? `${ height }px` : { base: `${ MOBILE_BANNER_HEIGHT }px`, lg: `${ DESKTOP_BANNER_HEIGHT }px` } }
+  //     w={ width ? `${ width }px` : undefined }
+  //   >
+  //     <Script strategy="lazyOnload" src="https://coinzillatag.com/lib/display.js"/>
+  //     <div className="coinzilla" data-zone="C-26660bf627543e46851"></div>
+  //   </Flex>
+  // );
+  return null;
 };
 
 export default chakra(CoinzillaBanner);

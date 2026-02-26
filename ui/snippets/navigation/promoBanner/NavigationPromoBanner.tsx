@@ -58,79 +58,20 @@ const NavigationPromoBanner = ({ isCollapsed }: Props) => {
     return null;
   }
 
-  return (
-    <Flex flex={1} mt={isHorizontalNavigation ? 0 : 3} pointerEvents="none">
-      <chakra.a
-        href={promoBanner.link_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        pointerEvents="auto"
-        w="full"
-        minW={isHorizontalNavigation ? "auto" : "60px"}
-        mt="auto"
-        position={isHorizontalNavigation ? undefined : "sticky"}
-        bottom={isHorizontalNavigation ? undefined : { base: 0, lg: 6 }}
-        overflow="hidden"
-        _hover={{
-          opacity: 0.8,
-          _icon: {
-            display: "block",
-          },
-        }}
-      >
-        <Tooltip
-          content={
-            !isTooltipDisabled && (
-              <NavigationPromoBannerContent
-                isCollapsed={false}
-                isHorizontalNavigation={false}
-              />
-            )
-          }
-          showArrow={false}
-          positioning={{
-            placement: isHorizontalNavigation ? "bottom" : "right-end",
-            offset: { crossAxis: 0, mainAxis: isHorizontalNavigation ? 8 : 5 },
-          }}
-          contentProps={{
-            p: 0,
-            borderRadius: "base",
-            bgColor: "transparent",
-            boxShadow: isHorizontalNavigation ? "2xl" : "none",
-            cursor: "default",
-          }}
-          interactive
-        >
-          <Box w="full" position="relative">
-            <NavigationPromoBannerContent
-              isCollapsed={isCollapsed}
-              isHorizontalNavigation={isHorizontalNavigation}
-            />
-            <IconSvg
-              onClick={handleClose}
-              name="close"
-              boxSize={3}
-              color="#CEB05D" // gold icon
-              bg="#0B0E14" // intentional black background
-              borderBottomLeftRadius="sm"
-              borderTopRightRadius="sm"
-              position="absolute"
-              top="0"
-              right="0"
-              display={isMobile ? "block" : "none"}
-              boxShadow="0 0 0 1px rgba(206,176,93,0.35)"
-              _hover={{
-                bg: "#141824",
-                boxShadow: "0 0 8px rgba(206,176,93,0.6)",
-                transform: "scale(1.05)",
-              }}
-              transition="all 0.2s ease"
-            />
-          </Box>
-        </Tooltip>
-      </chakra.a>
-    </Flex>
-  );
+  // Advertisement / promo banner display commented out (reversible)
+  // return (
+  //   <Flex flex={1} mt={isHorizontalNavigation ? 0 : 3} pointerEvents="none">
+  //     <chakra.a href={promoBanner.link_url} ...>
+  //       <Tooltip ...>
+  //         <Box w="full" position="relative">
+  //           <NavigationPromoBannerContent ... />
+  //           <IconSvg onClick={handleClose} name="close" ... />
+  //         </Box>
+  //       </Tooltip>
+  //     </chakra.a>
+  //   </Flex>
+  // );
+  return null;
 };
 
 export default NavigationPromoBanner;

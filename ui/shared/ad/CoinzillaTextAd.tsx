@@ -50,62 +50,36 @@ const CoinzillaTextAd = ({ className }: { className?: string }) => {
     }
   }, [ ]);
 
-  if (isLoading) {
-    return (
-      <Skeleton
-        loading
-        className={ className }
-        h={{ base: 12, lg: 6 }}
-        w="100%"
-        flexGrow={ 1 }
-        maxW="800px"
-        display="block"
-      />
-    );
-  }
-
-  if (!adData) {
-    return null;
-  }
-
-  const urlObject = new URL(adData.ad.url);
-
-  return (
-    <Box
-      className={ className }
-      display={{ base: 'flex', lg: 'block' }}
-      textStyle={{ base: 'xs', lg: 'md' }}
-      color={{ base: 'text.secondary', lg: 'text.primary' }}
-    >
-      <Text
-        as="span"
-        whiteSpace="pre-wrap"
-        fontWeight={ 700 }
-        mr={ 3 }
-        display={{ base: 'none', lg: 'inline' }}
-      >
-        Ads:
-      </Text>
-      { urlObject.hostname === 'nifty.ink' ?
-        <Text as="span" mr={ 1 }>🎨</Text> : (
-          <Image
-            src={ adData.ad.thumbnail }
-            width="20px"
-            height="20px"
-            display="inline-block"
-            verticalAlign="text-bottom"
-            flexShrink={ 0 }
-            alignSelf={{ base: 'flex-start', lg: 'center' }}
-            mr={ 1 }
-            alt=""
-          />
-        ) }
-      <Box display={{ base: 'block', lg: 'inline' }}>
-        <Text as="span" whiteSpace="pre-wrap">{ `${ adData.ad.name } ${ ndash } ${ adData.ad.description_short } ` }</Text>
-        <Link href={ adData.ad.url } external noIcon>{ adData.ad.cta_button }</Link>
-      </Box>
-    </Box>
-  );
+  // Advertisement display commented out (reversible)
+  // if (isLoading) {
+  //   return (
+  //     <Skeleton
+  //       loading
+  //       className={ className }
+  //       h={{ base: 12, lg: 6 }}
+  //       w="100%"
+  //       flexGrow={ 1 }
+  //       maxW="800px"
+  //       display="block"
+  //     />
+  //   );
+  // }
+  // if (!adData) {
+  //   return null;
+  // }
+  // const urlObject = new URL(adData.ad.url);
+  // return (
+  //   <Box
+  //     className={ className }
+  //     display={{ base: 'flex', lg: 'block' }}
+  //     textStyle={{ base: 'xs', lg: 'md' }}
+  //     color={{ base: 'text.secondary', lg: 'text.primary' }}
+  //   >
+  //     <Text ... />
+  //     ...
+  //   </Box>
+  // );
+  return null;
 };
 
 export default chakra(CoinzillaTextAd);

@@ -99,7 +99,8 @@ const ScrollL2TxnBatch = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
       <PageTitle
         title={ `Txn batch #${ number }` }
       />

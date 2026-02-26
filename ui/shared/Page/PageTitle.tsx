@@ -115,7 +115,8 @@ const PageTitle = ({ title, contentAfter, withTextAd, className, isLoading = fal
           { afterTitle }
         </Flex>
         { contentAfter }
-        { withTextAd && <TextAd order={{ base: -1, lg: 100 }} mb={{ base: 6, lg: 0 }} ml="auto" w={{ base: '100%', lg: 'auto' }}/> }
+        {/* Advertisement: text ad commented out (reversible) */}
+        {/* { withTextAd && <TextAd order={{ base: -1, lg: 100 }} mb={{ base: 6, lg: 0 }} ml="auto" w={{ base: '100%', lg: 'auto' }}/> } */}
       </Flex>
       { secondRow && (
         <Skeleton loading={ isLoading } alignItems="center" minH={ 10 } overflow="hidden" display="flex" _empty={{ display: 'none' }}>

@@ -531,7 +531,8 @@ const Multisend = () => {
           }}
         />
       </Container>
-      { (feature?.essentialDappsAdEnabled && !isMobile) && (
+      {/* Advertisement: banner commented out (reversible) */}
+      {/* { (feature?.essentialDappsAdEnabled && !isMobile) && (
         <AdBanner
           format="desktop"
           w="fit-content"
@@ -540,7 +541,7 @@ const Multisend = () => {
           mx="auto"
           mt={ 10 }
         />
-      ) }
+      ) } */}
     </>
   );
 };

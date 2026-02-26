@@ -14,7 +14,9 @@ const TextAd = ({ className }: { className?: string }) => {
     return null;
   }
 
-  return <CoinzillaTextAd className={ className }/>;
+  // Advertisement display commented out (reversible)
+  // return <CoinzillaTextAd className={ className }/>;
+  return null;
 };
 
 export default chakra(TextAd);

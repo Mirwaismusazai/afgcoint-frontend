@@ -135,7 +135,8 @@ const TokenInstanceContent = () => {
 
   return (
     <MetadataUpdateProvider>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
 
       <TokenInstancePageTitle
         isLoading={ isLoading }

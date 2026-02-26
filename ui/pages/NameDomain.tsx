@@ -84,7 +84,8 @@ const NameDomain = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
       <PageTitle title="Name details" secondRow={ titleSecondRow }/>
       <RoutedTabs tabs={ tabs } isLoading={ infoQuery.isPlaceholderData }/>
     </>

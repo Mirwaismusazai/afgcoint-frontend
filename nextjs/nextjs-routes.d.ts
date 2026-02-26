@@ -26,7 +26,14 @@ declare module "nextjs-routes" {
     | StaticRoute<"/api/monitoring/invalid-api-schema">
     | StaticRoute<"/api/proxy">
     | DynamicRoute<"/api/tokens/[hash]/instances/[id]/media-type", { "hash": string; "id": string }>
+    | DynamicRoute<"/api/v2/addresses/[hash]", { "hash": string }>
+    | DynamicRoute<"/api/v2/blocks/[height_or_hash]", { "height_or_hash": string }>
+    | StaticRoute<"/api/v2/search/check-redirect">
+    | StaticRoute<"/api/v2/search">
+    | StaticRoute<"/api/v2/search/parseSearchQuery">
+    | StaticRoute<"/api/v2/search/quick">
     | StaticRoute<"/api/v2/stats">
+    | DynamicRoute<"/api/v2/transactions/[hash]", { "hash": string }>
     | StaticRoute<"/api/v2/transactions/stats">
     | StaticRoute<"/api/v2/transactions">
     | StaticRoute<"/api-docs">

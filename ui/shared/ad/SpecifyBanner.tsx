@@ -68,28 +68,28 @@ const SpecifyBanner = ({ className, format = 'responsive', address, onEmpty, isL
     return { width: DESKTOP_BANNER_WIDTH, height: DESKTOP_BANNER_HEIGHT };
   })();
 
-  if (isLoading || isFetching) {
-    return (
-      <Box className={ className }
-        h={ height ? `${ height }px` : { base: `${ MOBILE_BANNER_HEIGHT }px`, lg: `${ DESKTOP_BANNER_HEIGHT }px` } }
-        w={ width ? `${ width }px` : undefined }
-      />
-    );
-  }
-
-  if (!ad) return null;
-
-  return (
-    <Image
-      src={ ad.imageUrl }
-      alt={ ad.headline }
-      cursor="pointer"
-      onClick={ handleClick }
-      className={ className }
-      w={ width ? `${ width }px` : { base: `${ MOBILE_BANNER_WIDTH }px`, lg: `${ DESKTOP_BANNER_WIDTH }px` } }
-      h={ height ? `${ height }px` : { base: `${ MOBILE_BANNER_HEIGHT }px`, lg: `${ DESKTOP_BANNER_HEIGHT }px` } }
-    />
-  );
+  // Advertisement display commented out (reversible)
+  // if (isLoading || isFetching) {
+  //   return (
+  //     <Box className={ className }
+  //       h={ height ? `${ height }px` : { base: `${ MOBILE_BANNER_HEIGHT }px`, lg: `${ DESKTOP_BANNER_HEIGHT }px` } }
+  //       w={ width ? `${ width }px` : undefined }
+  //     />
+  //   );
+  // }
+  // if (!ad) return null;
+  // return (
+  //   <Image
+  //     src={ ad.imageUrl }
+  //     alt={ ad.headline }
+  //     cursor="pointer"
+  //     onClick={ handleClick }
+  //     className={ className }
+  //     w={ width ? `${ width }px` : { base: `${ MOBILE_BANNER_WIDTH }px`, lg: `${ DESKTOP_BANNER_WIDTH }px` } }
+  //     h={ height ? `${ height }px` : { base: `${ MOBILE_BANNER_HEIGHT }px`, lg: `${ DESKTOP_BANNER_HEIGHT }px` } }
+  //   />
+  // );
+  return null;
 };
 
 export default chakra(SpecifyBanner);

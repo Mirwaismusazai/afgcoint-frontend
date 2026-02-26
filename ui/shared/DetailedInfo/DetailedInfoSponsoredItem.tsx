@@ -19,19 +19,16 @@ const DetailedInfoSponsoredItem = ({ isLoading }: Props) => {
     return null;
   }
 
-  return (
-    <>
-      <DetailedInfo.ItemLabel
-        hint="Sponsored banner advertisement"
-        isLoading={ isLoading }
-      >
-        Sponsored
-      </DetailedInfo.ItemLabel>
-      <DetailedInfo.ItemValue mt={{ base: 0, lg: 1 }}>
-        <AdBanner format="responsive" isLoading={ isLoading }/>
-      </DetailedInfo.ItemValue>
-    </>
-  );
+  // Advertisement: sponsored banner display commented out (reversible)
+  // return (
+  //   <>
+  //     <DetailedInfo.ItemLabel hint="Sponsored banner advertisement" isLoading={ isLoading }>Sponsored</DetailedInfo.ItemLabel>
+  //     <DetailedInfo.ItemValue mt={{ base: 0, lg: 1 }}>
+  //       <AdBanner format="responsive" isLoading={ isLoading }/>
+  //     </DetailedInfo.ItemValue>
+  //   </>
+  // );
+  return null;
 };
 
 export default React.memo(DetailedInfoSponsoredItem);

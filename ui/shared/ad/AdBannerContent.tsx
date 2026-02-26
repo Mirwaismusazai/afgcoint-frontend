@@ -36,32 +36,34 @@ const AdBannerContent = ({ className, isLoading, provider, format }: Props) => {
 
   const address = addressWC || profileQuery.data?.address_hash as `0x${ string }` | undefined;
 
-  const content = (() => {
-    if (showSpecify) {
-      const isLoading = address ? false : profileQuery.isLoading || isConnecting;
-      return <SpecifyBanner format={ format } address={ address } onEmpty={ handleEmptySpecify } isLoading={ isLoading }/>;
-    }
-    switch (provider) {
-      case 'adbutler':
-        return <AdbutlerBanner format={ format }/>;
-      case 'coinzilla':
-        return <CoinzillaBanner format={ format }/>;
-      case 'slise':
-        return <SliseBanner format={ format }/>;
-    }
-  })();
+  // Advertisement display commented out (reversible)
+  // const content = (() => {
+  //   if (showSpecify) {
+  //     const isLoading = address ? false : profileQuery.isLoading || isConnecting;
+  //     return <SpecifyBanner format={ format } address={ address } onEmpty={ handleEmptySpecify } isLoading={ isLoading }/>;
+  //   }
+  //   switch (provider) {
+  //     case 'adbutler':
+  //       return <AdbutlerBanner format={ format }/>;
+  //     case 'coinzilla':
+  //       return <CoinzillaBanner format={ format }/>;
+  //     case 'slise':
+  //       return <SliseBanner format={ format }/>;
+  //   }
+  // })();
 
-  return (
-    <Skeleton
-      className={ className }
-      loading={ isLoading }
-      borderRadius="none"
-      maxW={{ base: `${ MOBILE_BANNER_WIDTH }px`, lg: `${ DESKTOP_BANNER_WIDTH }px` }}
-      w="100%"
-    >
-      { content }
-    </Skeleton>
-  );
+  // return (
+  //   <Skeleton
+  //     className={ className }
+  //     loading={ isLoading }
+  //     borderRadius="none"
+  //     maxW={{ base: `${ MOBILE_BANNER_WIDTH }px`, lg: `${ DESKTOP_BANNER_WIDTH }px` }}
+  //     w="100%"
+  //   >
+  //     { content }
+  //   </Skeleton>
+  // );
+  return null;
 };
 
 export default chakra(AdBannerContent);

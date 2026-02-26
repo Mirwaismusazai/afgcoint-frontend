@@ -7,6 +7,7 @@ import type { ClusterChainConfig } from 'types/multichain';
 
 import config from 'configs/app';
 import { Badge } from 'toolkit/chakra/badge';
+import { Skeleton } from 'toolkit/chakra/skeleton';
 import { TableCell, TableRow } from 'toolkit/chakra/table';
 import AddressFromTo from 'ui/shared/address/AddressFromTo';
 import BlockPendingUpdateHint from 'ui/shared/block/BlockPendingUpdateHint';
@@ -126,14 +127,20 @@ const TxsTableItem = ({
       </TableCell>
       { !config.UI.views.tx.hiddenFields?.value && (
         <TableCell isNumeric>
-          <NativeCoinValue
-            amount={ tx.value }
-            noSymbol
-            loading={ isLoading }
-            exchangeRate={ tx.exchange_rate }
-            layout="vertical"
-            rowGap={ 3 }
-          />
+          { tx.transaction_types?.includes('token_transfer') ? (
+            <Skeleton loading={ isLoading } minW="80px">
+              { Number(tx.value || 0).toLocaleString() } AFG
+            </Skeleton>
+          ) : (
+            <NativeCoinValue
+              amount={ tx.value }
+              noSymbol
+              loading={ isLoading }
+              exchangeRate={ tx.exchange_rate }
+              layout="vertical"
+              rowGap={ 3 }
+            />
+          ) }
         </TableCell>
       ) }
       { !config.UI.views.tx.hiddenFields?.tx_fee && (

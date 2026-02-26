@@ -122,7 +122,8 @@ const TransactionPageContent = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
       <PageTitle
         title="Transaction details"
         contentAfter={ tags }

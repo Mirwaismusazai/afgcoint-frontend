@@ -92,7 +92,8 @@ const OptimisticL2TxnBatch = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
       <PageTitle
         title={ `Batch #${ batchQuery.data?.number }` }
         isLoading={ batchQuery.isPlaceholderData }

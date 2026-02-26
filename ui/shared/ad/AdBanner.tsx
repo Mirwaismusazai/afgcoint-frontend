@@ -26,14 +26,16 @@ const AdBanner = ({ className, isLoading, format }: Props) => {
     return null;
   }
 
-  return (
-    <AdBannerContent
-      className={ className }
-      isLoading={ isLoading }
-      provider={ provider }
-      format={ format }
-    />
-  );
+  // Advertisement display commented out (reversible)
+  // return (
+  //   <AdBannerContent
+  //     className={ className }
+  //     isLoading={ isLoading }
+  //     provider={ provider }
+  //     format={ format }
+  //   />
+  // );
+  return null;
 };
 
 export default chakra(AdBanner);

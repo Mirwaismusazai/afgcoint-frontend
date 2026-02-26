@@ -71,7 +71,8 @@ const ZkSyncL2TxnBatch = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
       <PageTitle title={ `Txn batch #${ number }` }/>
       <RoutedTabs
         tabs={ tabs }

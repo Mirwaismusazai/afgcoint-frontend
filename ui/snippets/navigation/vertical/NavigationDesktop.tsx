@@ -156,7 +156,8 @@ const NavigationDesktop = () => {
           </VStack>
         </Box>
       )}
-      <NavigationPromoBanner isCollapsed={isCollapsed} />
+      {/* Advertisement: promo banner commented out (reversible) */}
+      {/* <NavigationPromoBanner isCollapsed={isCollapsed} /> */}
       <IconSvg
         name="arrows/east-mini"
         width={6}

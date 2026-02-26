@@ -109,7 +109,8 @@ const AppError = ({ error, className }: Props) => {
                 Back to home
               </Button>
             </Link>
-            { statusCode === 404 && adBannerProvider && <AdBannerContent mt={ 12 } provider={ adBannerProvider }/> }
+            {/* Advertisement: banner commented out (reversible) */}
+            {/* { statusCode === 404 && adBannerProvider && <AdBannerContent mt={ 12 } provider={ adBannerProvider }/> } */}
           </>
         );
       }

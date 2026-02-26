@@ -54,7 +54,8 @@ const BlobPageContent = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
       <PageTitle
         title="Blob details"
         secondRow={ titleSecondRow }

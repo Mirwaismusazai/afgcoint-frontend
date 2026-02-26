@@ -85,7 +85,8 @@ const UserOp = () => {
 
   return (
     <>
-      <TextAd mb={ 6 }/>
+      {/* Advertisement: text ad commented out (reversible) */}
+      {/* <TextAd mb={ 6 }/> */}
       <PageTitle
         title="User operation details"
         secondRow={ titleSecondRow }

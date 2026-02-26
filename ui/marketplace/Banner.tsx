@@ -59,7 +59,8 @@ const Banner = ({ apps = [], favoriteApps, isLoading, onInfoClick, onFavoriteCli
   return (
     <Flex gap={ 6 }>
       { content }
-      { !isMobile && (
+      {/* Advertisement: banner commented out (reversible) */}
+      {/* { !isMobile && (
         <AdBanner
           format="mobile"
           w="fit-content"
@@ -67,7 +68,7 @@ const Banner = ({ apps = [], favoriteApps, isLoading, onInfoClick, onFavoriteCli
           borderRadius="md"
           overflow="hidden"
         />
-      ) }
+      ) } */}
     </Flex>
   );
 };

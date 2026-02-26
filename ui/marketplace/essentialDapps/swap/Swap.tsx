@@ -136,7 +136,8 @@ const Swap = () => {
   return (
     <Flex flex="1" flexDir="column" justifyContent="space-between" gap={ 6 }>
       <Widget/>
-      { (feature?.essentialDappsAdEnabled && !isMobile) && (
+      {/* Advertisement: banner commented out (reversible) */}
+      {/* { (feature?.essentialDappsAdEnabled && !isMobile) && (
         <AdBanner
           format="mobile"
           w="fit-content"
@@ -144,7 +145,7 @@ const Swap = () => {
           overflow="hidden"
           ml="auto"
         />
-      ) }
+      ) } */}
     </Flex>
   );
 };

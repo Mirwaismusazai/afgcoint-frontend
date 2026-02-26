@@ -121,12 +121,18 @@ const TxsListItem = ({
       { !config.UI.views.tx.hiddenFields?.value && (
         <Flex mt={ 2 } columnGap={ 2 }>
           <Skeleton loading={ isLoading } display="inline-block" whiteSpace="pre">Value</Skeleton>
-          <NativeCoinValue
-            amount={ tx.value }
-            exchangeRate={ tx.exchange_rate }
-            loading={ isLoading }
-            color="text.secondary"
-          />
+          { tx.transaction_types?.includes('token_transfer') ? (
+            <Skeleton loading={ isLoading } color="text.secondary">
+              { Number(tx.value || 0).toLocaleString() } AFG
+            </Skeleton>
+          ) : (
+            <NativeCoinValue
+              amount={ tx.value }
+              exchangeRate={ tx.exchange_rate }
+              loading={ isLoading }
+              color="text.secondary"
+            />
+          ) }
         </Flex>
       ) }
       { !config.UI.views.tx.hiddenFields?.tx_fee && (
