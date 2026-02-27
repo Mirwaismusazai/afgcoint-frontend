@@ -36,6 +36,7 @@ declare module "nextjs-routes" {
     | StaticRoute<"/api/v2/search/parseSearchQuery">
     | StaticRoute<"/api/v2/search/quick">
     | StaticRoute<"/api/v2/stats">
+    | DynamicRoute<"/api/v2/transactions/[hash]/afg-value", { "hash": string }>
     | DynamicRoute<"/api/v2/transactions/[hash]", { "hash": string }>
     | StaticRoute<"/api/v2/transactions/stats">
     | StaticRoute<"/api/v2/transactions">

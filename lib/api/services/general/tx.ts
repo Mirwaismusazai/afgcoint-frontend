@@ -91,6 +91,10 @@ export const GENERAL_API_TX_RESOURCES = {
     path: '/api/v2/transactions/:hash/external-transactions',
     pathParams: [ 'hash' as const ],
   },
+  tx_afg_value: {
+    path: '/api/v2/transactions/:hash/afg-value',
+    pathParams: [ 'hash' as const ],
+  },
   internal_txs: {
     path: '/api/v2/internal-transactions',
     paginated: true,
@@ -117,6 +121,7 @@ R extends 'general:tx_state_changes' ? TxStateChanges :
 R extends 'general:tx_blobs' ? TxBlobs :
 R extends 'general:tx_interpretation' ? TxInterpretationResponse :
 R extends 'general:tx_external_transactions' ? Array<string> :
+R extends 'general:tx_afg_value' ? { value: string | null } :
 R extends 'general:internal_txs' ? InternalTransactionsResponse :
 never;
 /* eslint-enable @stylistic/indent */

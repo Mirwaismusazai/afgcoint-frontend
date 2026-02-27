@@ -20,11 +20,13 @@ const zetachainFeature = config.features.zetachain;
 const LatestTxs = () => {
   const isMobile = useIsMobile();
   const txsCount = isMobile ? 2 : 5;
-  const { data, isPlaceholderData, isError } = useApiQuery('general:homepage_txs', {
+  const { data, isPlaceholderData, isError } = useApiQuery('general:txs_validated', {
+    queryParams: { filter: 'validated' },
     queryOptions: {
-      placeholderData: Array(txsCount).fill(TX),
+      placeholderData: { items: Array(txsCount).fill(TX), next_page_params: null },
     },
   });
+  const items = data?.items?.slice(0, txsCount) ?? [];
 
   const { num, showErrorAlert } = useNewTxsSocket({ type: 'txs_home', isLoading: isPlaceholderData });
 
@@ -38,7 +40,7 @@ const LatestTxs = () => {
       <>
         <SocketNewItemsNotice borderBottomRadius={ 0 } url={ txsUrl } num={ num } showErrorAlert={ showErrorAlert } isLoading={ isPlaceholderData }/>
         <Box mb={ 3 } display={{ base: 'block', lg: 'none' }} textStyle="sm">
-          { data.slice(0, txsCount).map(((tx, index) => (
+          { items.map(((tx, index) => (
             <LatestTxsItemMobile
               key={ tx.hash + (isPlaceholderData ? index : '') }
               tx={ tx }
@@ -48,7 +50,7 @@ const LatestTxs = () => {
         </Box>
         <AddressHighlightProvider>
           <Box mb={ 3 } display={{ base: 'none', lg: 'block' }} textStyle="sm">
-            { data.slice(0, txsCount).map(((tx, index) => (
+            { items.map(((tx, index) => (
               <LatestTxsItem
                 key={ tx.hash + (isPlaceholderData ? index : '') }
                 tx={ tx }

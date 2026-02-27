@@ -85,12 +85,17 @@ const LatestTxsItem = ({ tx, isLoading }: Props) => {
           { !config.UI.views.tx.hiddenFields?.value && (
             <Skeleton loading={ isLoading }>
               <Text as="span" whiteSpace="pre">Value </Text>
-              <NativeCoinValue
-                amount={ tx.value }
-                accuracy={ 5 }
-                loading={ isLoading }
-                color="text.secondary"
-              />
+              { tx.transaction_types?.includes('token_transfer') ? (
+                <Text as="span" color="text.secondary">{ Number(tx.value || 0).toLocaleString() } AFG</Text>
+              ) : (
+                <NativeCoinValue
+                  amount={ tx.value }
+                  accuracy={ 5 }
+                  loading={ isLoading }
+                  color="text.secondary"
+                  noUsd
+                />
+              ) }
             </Skeleton>
           ) }
           { !config.UI.views.tx.hiddenFields?.tx_fee && (
