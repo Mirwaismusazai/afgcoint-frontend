@@ -28,6 +28,9 @@ declare module "nextjs-routes" {
     | DynamicRoute<"/api/tokens/[hash]/instances/[id]/media-type", { "hash": string; "id": string }>
     | DynamicRoute<"/api/v2/addresses/[hash]", { "hash": string }>
     | DynamicRoute<"/api/v2/blocks/[height_or_hash]", { "height_or_hash": string }>
+    | StaticRoute<"/api/v2/blocks">
+    | StaticRoute<"/api/v2/main-page/blocks">
+    | StaticRoute<"/api/v2/main-page/transactions">
     | StaticRoute<"/api/v2/search/check-redirect">
     | StaticRoute<"/api/v2/search">
     | StaticRoute<"/api/v2/search/parseSearchQuery">

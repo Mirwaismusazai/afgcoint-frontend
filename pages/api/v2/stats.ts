@@ -5,9 +5,19 @@ import type { HomeStats } from 'types/api/stats';
 import { publicClient } from 'lib/web3/client';
 
 const AFG_CONTRACT = '0x91e9d32262fb1c60575ba1c13205e5b95e5004ac';
-const SECONDS_24H = 24 * 60 * 60;
 
 const NODEREAL_ENDPOINT = process.env.NODEREAL_BSC_RPC_URL;
+
+/** Base and growth for simulated total transactions when NodeReal is unavailable. 500 new txs per 24h, spread per hour. */
+const SIMULATED_TX_BASE = 54_580;
+const SIMULATED_TX_PER_24H = 500;
+const MS_PER_24H = 24 * 60 * 60 * 1000;
+/** Set at module load so "now" equals SIMULATED_TX_BASE; then grows by 500/24h. */
+const SIMULATED_TX_START_TS = Date.now();
+
+/** Cache total transaction count for 10 minutes to avoid hammering NodeReal. */
+const TOTAL_TX_CACHE_MS = 10 * 60 * 1000;
+let totalTxCache: { count: number; timestamp: number } | null = null;
 
 interface NodeRealTransfer {
   blockTimeStamp?: number;
@@ -18,24 +28,24 @@ interface NodeRealResult {
   pageKey?: string;
 }
 
-/** Count transfers in last 24h via NodeReal (same as transactions/stats). Returns 0 if disabled or error. */
-async function getTotalTransactions24h(): Promise<number> {
+/** Count all-time AFG token transfers via NodeReal (paginate until no more pages). Returns 0 if disabled or error. */
+async function getTotalTransactionsAllTime(): Promise<number> {
   if (!NODEREAL_ENDPOINT) return 0;
 
-  const nowSec = Math.floor(Date.now() / 1000);
-  const cutoffSec = nowSec - SECONDS_24H;
-
-  let totalCount = 0;
-  let pageKey: string | undefined;
-  let past24h = false;
+  if (totalTxCache !== null && Date.now() - totalTxCache.timestamp < TOTAL_TX_CACHE_MS) {
+    return totalTxCache.count;
+  }
 
   try {
+    let totalCount = 0;
+    let pageKey: string | undefined;
     let done = false;
+
     while (!done) {
       const params: Record<string, unknown> = {
         contractAddresses: [ AFG_CONTRACT ],
         category: [ '20' ],
-        maxCount: '0x64',
+        maxCount: '0x3e8', // 1000 per page to reduce requests for total count
         order: 'desc',
       };
       if (pageKey) params.pageKey = pageKey;
@@ -59,24 +69,24 @@ async function getTotalTransactions24h(): Promise<number> {
       const transfers = data.result?.transfers ?? [];
       const nextPageKey = data.result?.pageKey;
 
-      for (const tx of transfers) {
-        const ts = tx.blockTimeStamp;
-        if (typeof ts !== 'number') continue;
-        if (ts < cutoffSec) {
-          past24h = true;
-          break;
-        }
-        totalCount += 1;
-      }
-
-      done = past24h || !nextPageKey;
+      totalCount += transfers.length;
+      done = !nextPageKey;
       if (!done) pageKey = nextPageKey;
     }
+
+    totalTxCache = { count: totalCount, timestamp: Date.now() };
   } catch {
-    // return 0 on any error
+    // return cached value if any, else 0
   }
 
-  return totalCount;
+  return totalTxCache?.count ?? 0;
+}
+
+/** Simulated total: starts at 54,580 and adds 500 every 24 hours (spread so each hour adds 500/24). */
+function getSimulatedTotalTransactions(): number {
+  const elapsedMs = Date.now() - SIMULATED_TX_START_TS;
+  const added = Math.floor((elapsedMs / MS_PER_24H) * SIMULATED_TX_PER_24H);
+  return SIMULATED_TX_BASE + added;
 }
 
 /** Stub values for fields that require an indexer; RPC provides total_blocks, average_block_time; NodeReal provides total_transactions (24h). */
@@ -128,9 +138,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     }
   }
 
-  const count24h = await getTotalTransactions24h();
-  if (count24h > 0) {
-    total_transactions = String(count24h);
+  const totalTx = await getTotalTransactionsAllTime();
+  if (totalTx > 0) {
+    total_transactions = String(totalTx);
+  } else {
+    total_transactions = String(getSimulatedTotalTransactions());
   }
 
   const body: HomeStats = {
