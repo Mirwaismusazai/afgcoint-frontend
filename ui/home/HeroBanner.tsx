@@ -60,7 +60,7 @@ const HeroBanner = () => {
                 color={DARK_TEXT}
                 letterSpacing="0.4px"
               >
-                AFGCoin
+                AFGScan
               </Heading>
 
               {/* Elegant animated "Coming Soon" badge */}

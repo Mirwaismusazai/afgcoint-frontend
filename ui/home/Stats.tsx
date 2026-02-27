@@ -183,13 +183,14 @@ const Stats = () => {
         href: { pathname: '/batches' as const },
         isLoading,
       },
-      (statsData?.total_addresses?.value || apiData?.total_addresses) && {
-        id: 'wallet_addresses' as const,
-        icon: 'wallet' as const,
-        label: statsData?.total_addresses?.title || 'Wallet addresses',
-        value: Number(statsData?.total_addresses?.value || apiData?.total_addresses).toLocaleString(),
-        isLoading,
-      },
+      // Wallet addresses widget is intentionally hidden on the homepage.
+      // (statsData?.total_addresses?.value || apiData?.total_addresses) && {
+      //   id: 'wallet_addresses' as const,
+      //   icon: 'wallet' as const,
+      //   label: statsData?.total_addresses?.title || 'Wallet addresses',
+      //   value: Number(statsData?.total_addresses?.value || apiData?.total_addresses).toLocaleString(),
+      //   isLoading,
+      // },
       hasGasTracker && apiData?.gas_prices && {
         id: 'gas_tracker' as const,
         icon: 'gas' as const,
